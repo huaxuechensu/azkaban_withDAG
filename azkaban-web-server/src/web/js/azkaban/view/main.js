@@ -153,6 +153,7 @@ azkaban.CreateProjectView = Backbone.View.extend({
     // First make sure we can upload
     var projectName = $('#path').val();
     var description = $('#description').val();
+    var projectType = $('#projectType').val();
     console.log("Creating");
     $.ajax({
       async: "false",
@@ -162,7 +163,8 @@ azkaban.CreateProjectView = Backbone.View.extend({
       data: {
         action: "create",
         name: projectName,
-        description: description
+        description: description,
+          projectType:projectType
       },
       success: function (data) {
         if (data.status == "success") {

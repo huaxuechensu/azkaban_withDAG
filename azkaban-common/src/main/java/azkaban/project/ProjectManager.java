@@ -280,6 +280,52 @@ public class ProjectManager {
 
     return newProject;
   }
+    //added by chenyuqg on 2017-12-4
+    public Project createProject(final String projectName,final String projectType, final String description,
+                                 final User creator) throws ProjectManagerException {
+        if (projectName == null || projectName.trim().isEmpty()) {
+            throw new ProjectManagerException("Project name cannot be empty.");
+        } else if (description == null || description.trim().isEmpty()) {
+            throw new ProjectManagerException("Description cannot be empty.");
+        } else if (creator == null) {
+            throw new ProjectManagerException("Valid creator user must be set.");
+        } else if (!projectName.matches("[a-zA-Z][a-zA-Z_0-9|-]*")) {
+            throw new ProjectManagerException(
+                    "Project names must start with a letter, followed by any number of letters, digits, '-' or '_'.");
+        }
+
+        if (this.projectsByName.containsKey(projectName)) {
+            throw new ProjectManagerException("Project already exists.");
+        }
+
+        logger.info("Trying to create " + projectName + " by user "
+                + creator.getUserId());
+        final Project newProject =
+                this.projectLoader.createNewProject(projectName, projectType, description, creator);
+        this.projectsByName.put(newProject.getName(), newProject);
+        this.projectsById.put(newProject.getId(), newProject);
+
+        if (this.creatorDefaultPermissions) {
+            // Add permission to project
+            this.projectLoader.updatePermission(newProject, creator.getUserId(),
+                    new Permission(Permission.Type.ADMIN), false);
+
+            // Add proxy user
+            newProject.addProxyUser(creator.getUserId());
+            try {
+                updateProjectSetting(newProject);
+            } catch (final ProjectManagerException e) {
+                e.printStackTrace();
+                throw e;
+            }
+        }
+
+        this.projectLoader.postEvent(newProject, EventType.CREATED, creator.getUserId(),
+                null);
+
+        return newProject;
+    }
+
 
   /**
    * Permanently delete all project files and properties data for all versions of a project and log
