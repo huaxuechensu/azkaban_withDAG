@@ -152,7 +152,16 @@
                        placeholder="Project name">
               </div>
             </div>
-            <div class="form-group">
+              <div class="form-group">
+                  <label for="projectType" class="col-sm-2 control-label">Project Type</label>
+                  <div class="col-sm-10">
+                      <select id="projectType" class="form-control">
+                          <option value=1>Internal</option>
+                          <option value=2>External</option>
+                      </select>
+                  </div>
+              </div>
+              <div class="form-group">
               <label for="description" class="col-sm-2 control-label">Description</label>
               <div class="col-sm-10">
                 <textarea id="description" name="description" rows="2" cols="40"
