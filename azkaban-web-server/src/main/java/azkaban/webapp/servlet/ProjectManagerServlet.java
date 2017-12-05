@@ -196,6 +196,7 @@ public class ProjectManagerServlet extends LoginAbstractAzkabanServlet {
     }
   }
 
+  //处理页面请求   handle get request from page.
   @Override
   protected void handlePost(final HttpServletRequest req, final HttpServletResponse resp,
       final Session session) throws ServletException, IOException {
@@ -1605,6 +1606,8 @@ public class ProjectManagerServlet extends LoginAbstractAzkabanServlet {
   private void handleCreate(final HttpServletRequest req, final HttpServletResponse resp,
       final Session session) throws ServletException {
     final String projectName = hasParam(req, "name") ? getParam(req, "name") : null;
+      final String projectType = hasParam(req, "projectType") ? getParam(req, "projectType") : null;
+      final String incomingId = hasParam(req, "incomingId") ? getParam(req, "incomingId") : null;
     final String projectDescription =
         hasParam(req, "description") ? getParam(req, "description") : null;
     logger.info("Create project " + projectName);
@@ -1625,7 +1628,7 @@ public class ProjectManagerServlet extends LoginAbstractAzkabanServlet {
       status = "error";
     } else {
       try {
-        this.projectManager.createProject(projectName, projectDescription, user);
+        this.projectManager.createProject(projectName,projectType, incomingId, projectDescription, user);
         status = "success";
         action = "redirect";
         final String redirect = "manager?project=" + projectName;
