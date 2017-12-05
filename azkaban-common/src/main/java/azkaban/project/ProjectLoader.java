@@ -57,6 +57,9 @@ public interface ProjectLoader {
       throws ProjectManagerException;
     Project createNewProject(String name, String projectType, String description, User creator)
             throws ProjectManagerException;
+    Project createNewProject(String name, String projectType, String incomingId, String description, User creator)
+            throws ProjectManagerException;
+
   /**
    * Removes the project by marking it inactive.
    */

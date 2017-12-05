@@ -281,7 +281,7 @@ public class ProjectManager {
     return newProject;
   }
     //added by chenyuqg on 2017-12-4
-    public Project createProject(final String projectName,final String projectType, final String description,
+    public Project createProject(final String projectName,final String projectType, final String incomingId,final String description,
                                  final User creator) throws ProjectManagerException {
         if (projectName == null || projectName.trim().isEmpty()) {
             throw new ProjectManagerException("Project name cannot be empty.");
@@ -301,7 +301,7 @@ public class ProjectManager {
         logger.info("Trying to create " + projectName + " by user "
                 + creator.getUserId());
         final Project newProject =
-                this.projectLoader.createNewProject(projectName, projectType, description, creator);
+                this.projectLoader.createNewProject(projectName, projectType,incomingId, description, creator);
         this.projectsByName.put(newProject.getName(), newProject);
         this.projectsById.put(newProject.getId(), newProject);
 
