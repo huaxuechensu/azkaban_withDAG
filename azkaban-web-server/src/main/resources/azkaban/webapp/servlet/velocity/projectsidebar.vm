@@ -31,8 +31,11 @@
   <p><strong>Last modified by</strong> $utils.formatDate($project.lastModifiedTimestamp)</p>
   <p><strong>Modified by</strong> $project.lastModifiedUser</p>
 
-  <hr>
+    <hr>
+    <p><strong>Project Type</strong> $project.projectType</p>
+    <p><strong>Icoming Id</strong> $project.incomingId</p>
 
+  <hr>
   <p><strong>Project admins:</strong> $admins</p>
   <p><strong>Your Permissions:</strong> $userpermission.toString()</p>
 </div>
