@@ -49,8 +49,8 @@ public class ExecutableFlow extends ExecutableFlowBase {
   private int scheduleId = -1;
   private int projectId;
   private String projectName;
-    private String projectType;
-    private String incomingId;
+  private String projectType;
+  private String incomingId;
   private String lastModifiedUser;
   private int version;
   private long submitTime = -1;
