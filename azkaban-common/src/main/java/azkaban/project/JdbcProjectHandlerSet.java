@@ -41,16 +41,16 @@ class JdbcProjectHandlerSet {
   public static class ProjectResultHandler implements ResultSetHandler<List<Project>> {
 
     public static String SELECT_PROJECT_BY_NAME =
-        "SELECT id, name, active, modified_time, create_time, version, last_modified_by, description, enc_type, settings_blob FROM projects WHERE name=?";
+        "SELECT id, name, project_type,incoming_id, active, modified_time, create_time, version, last_modified_by, description, enc_type, settings_blob FROM projects WHERE name=?";
 
     public static String SELECT_PROJECT_BY_ID =
-        "SELECT id, name, active, modified_time, create_time, version, last_modified_by, description, enc_type, settings_blob FROM projects WHERE id=?";
+        "SELECT id, name, project_type,incoming_id, active, modified_time, create_time, version, last_modified_by, description, enc_type, settings_blob FROM projects WHERE id=?";
 
     public static String SELECT_ALL_ACTIVE_PROJECTS =
-        "SELECT id, name, active, modified_time, create_time, version, last_modified_by, description, enc_type, settings_blob FROM projects WHERE active=true";
+        "SELECT id, name, project_type,incoming_id, active, modified_time, create_time, version, last_modified_by, description, enc_type, settings_blob FROM projects WHERE active=true";
 
     public static String SELECT_ACTIVE_PROJECT_BY_NAME =
-        "SELECT id, name, active, modified_time, create_time, version, last_modified_by, description, enc_type, settings_blob FROM projects WHERE name=? AND active=true";
+        "SELECT id, name, project_type,incoming_id, active, modified_time, create_time, version, last_modified_by, description, enc_type, settings_blob FROM projects WHERE name=? AND active=true";
 
     @Override
     public List<Project> handle(final ResultSet rs) throws SQLException {
@@ -62,14 +62,16 @@ class JdbcProjectHandlerSet {
       do {
         final int id = rs.getInt(1);
         final String name = rs.getString(2);
-        final boolean active = rs.getBoolean(3);
-        final long modifiedTime = rs.getLong(4);
-        final long createTime = rs.getLong(5);
-        final int version = rs.getInt(6);
-        final String lastModifiedBy = rs.getString(7);
-        final String description = rs.getString(8);
-        final int encodingType = rs.getInt(9);
-        final byte[] data = rs.getBytes(10);
+        final String projectType = rs.getString(3);
+          final String incomingId = rs.getString(4);
+        final boolean active = rs.getBoolean(5);
+        final long modifiedTime = rs.getLong(6);
+        final long createTime = rs.getLong(7);
+        final int version = rs.getInt(8);
+        final String lastModifiedBy = rs.getString(9);
+        final String description = rs.getString(10);
+        final int encodingType = rs.getInt(11);
+        final byte[] data = rs.getBytes(12);
 
         final Project project;
         if (data != null) {
@@ -97,6 +99,8 @@ class JdbcProjectHandlerSet {
         // update the fields as they may have changed
 
         project.setActive(active);
+        project.setProjectType(projectType);
+        project.setIncomingId(incomingId);
         project.setLastModifiedTimestamp(modifiedTime);
         project.setCreateTimestamp(createTime);
         project.setVersion(version);

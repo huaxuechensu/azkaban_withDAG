@@ -29,9 +29,13 @@
   <hr>
   <p><strong>Created on</strong> $utils.formatDate($project.createTimestamp)</p>
   <p><strong>Last modified by</strong> $utils.formatDate($project.lastModifiedTimestamp)</p>
+    <p><strong>Project Type</strong> $project.projectType</p>
   <p><strong>Modified by</strong> $project.lastModifiedUser</p>
 
-  <hr>
+    <hr>
+
+    #* 外部传过来的id没有必要展示，没有实际作用。只是程序用来做内部关联查询用
+    <p><strong>Icoming Id</strong> $project.incomingId</p>*#
 
   <p><strong>Project admins:</strong> $admins</p>
   <p><strong>Your Permissions:</strong> $userpermission.toString()</p>
