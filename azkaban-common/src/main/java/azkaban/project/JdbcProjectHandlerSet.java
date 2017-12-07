@@ -63,7 +63,7 @@ class JdbcProjectHandlerSet {
         final int id = rs.getInt(1);
         final String name = rs.getString(2);
         final String projectType = rs.getString(3);
-          final String incomingId = rs.getString(4);
+        final String incomingId = rs.getString(4);
         final boolean active = rs.getBoolean(5);
         final long modifiedTime = rs.getLong(6);
         final long createTime = rs.getLong(7);

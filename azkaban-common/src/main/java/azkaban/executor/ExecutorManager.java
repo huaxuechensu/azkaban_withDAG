@@ -994,6 +994,7 @@ public class ExecutorManager extends EventHandler implements
 
         // The exflow id is set by the loader. So it's unavailable until after
         // this call.
+        //project的执行是在这个时候写入到表execution_flow中的
         this.executorLoader.uploadExecutableFlow(exflow);
 
         // We create an active flow reference in the datastore. If the upload

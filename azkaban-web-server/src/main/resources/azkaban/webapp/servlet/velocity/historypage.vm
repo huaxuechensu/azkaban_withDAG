@@ -90,6 +90,7 @@
             <th>Flow</th>
             <th>Project</th>
             <th>User</th>
+            <th>Project Type</th>
             <th class="date">Start Time</th>
             <th class="date">End Time</th>
             <th class="elapse">Elapsed</th>
@@ -114,6 +115,9 @@
                   <a href="${context}/manager?project=$vmutils.getProjectName(${flow.projectId})">$vmutils.getProjectName(${flow.projectId})</a>
                 </td>
                 <td>${flow.submitUser}</td>
+                  #if(${flow.projectType}!="")
+                      <td>${flow.projectType}</td>
+                  #end
                 <td>$utils.formatDate(${flow.startTime})</td>
                 <td>$utils.formatDate(${flow.endTime})</td>
                 <td>$utils.formatDuration(${flow.startTime}, ${flow.endTime})</td>
