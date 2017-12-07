@@ -49,6 +49,8 @@ public class ExecutableFlow extends ExecutableFlowBase {
   private int scheduleId = -1;
   private int projectId;
   private String projectName;
+  private String projectType;
+  private String incomingId;
   private String lastModifiedUser;
   private int version;
   private long submitTime = -1;
@@ -61,6 +63,8 @@ public class ExecutableFlow extends ExecutableFlowBase {
   public ExecutableFlow(final Project project, final Flow flow) {
     this.projectId = project.getId();
     this.projectName = project.getName();
+    this.projectType = project.getProjectType();
+    this.incomingId = project.getIncomingId();
     this.version = project.getVersion();
     this.scheduleId = -1;
     this.lastModifiedTimestamp = project.getLastModifiedTimestamp();
@@ -167,8 +171,19 @@ public class ExecutableFlow extends ExecutableFlowBase {
   public String getProjectName() {
     return this.projectName;
   }
-
-  public int getScheduleId() {
+    public String getProjectType() {
+        return projectType;
+    }
+    public String getIncomingId() {
+        return incomingId;
+    }
+    public void setProjectType(String projectType) {
+        this.projectType = projectType;
+    }
+    public void setIncomingId(String incomingId) {
+        this.incomingId = incomingId;
+    }
+    public int getScheduleId() {
     return this.scheduleId;
   }
 
