@@ -115,9 +115,13 @@
                   <a href="${context}/manager?project=$vmutils.getProjectName(${flow.projectId})">$vmutils.getProjectName(${flow.projectId})</a>
                 </td>
                 <td>${flow.submitUser}</td>
-                  #if(${flow.projectType}!="")
-                      <td>${flow.projectType}</td>
-                  #end
+                  <td>
+                 #* #if($null.isNull($flow.projectType) || $flow.projectType.size()==0)
+                        --
+                   #else
+                  #end*#
+                      ${flow.projectType}
+                  </td>
                 <td>$utils.formatDate(${flow.startTime})</td>
                 <td>$utils.formatDate(${flow.endTime})</td>
                 <td>$utils.formatDuration(${flow.startTime}, ${flow.endTime})</td>
