@@ -37,7 +37,6 @@ public class Project {
   private final String name;
   private String projectType;
   private String incomingId;
-
   private final LinkedHashMap<String, Permission> userPermissionMap =
       new LinkedHashMap<>();
   private final LinkedHashMap<String, Permission> groupPermissionMap =
@@ -62,22 +61,18 @@ public class Project {
         this.name = name;
         this.projectType = projectType;
     }
-
     public Project(final int id, final String name, final String projectType, final String incomingId) {
         this.id = id;
         this.name = name;
         this.projectType = projectType;
         this.incomingId = incomingId;
     }
-
   public static Project projectFromObject(final Object object) {
     final Map<String, Object> projectObject = (Map<String, Object>) object;
     final int id = (Integer) projectObject.get("id");
     final String name = (String) projectObject.get("name");
     final String projectType = (String) projectObject.get("projectType");
-
     final String incomingId = (String) projectObject.get("incomingId");
-
     final String description = (String) projectObject.get("description");
     final String lastModifiedUser = (String) projectObject.get("lastModifiedUser");
     final long createTimestamp = coerceToLong(projectObject.get("createTimestamp"));
@@ -93,9 +88,7 @@ public class Project {
     final Project project = new Project(id, name);
     project.setVersion(version);
     project.setProjectType(projectType);
-
     project.setIncomingId(incomingId);
-
     project.setDescription(description);
     project.setCreateTimestamp(createTimestamp);
     project.setLastModifiedTimestamp(lastModifiedTimestamp);
@@ -286,7 +279,6 @@ public class Project {
         this.incomingId = incomingId;
     }
 
-
     public void setUserPermission(final String userid, final Permission perm) {
     this.userPermissionMap.put(userid, perm);
   }
@@ -340,9 +332,7 @@ public class Project {
     projectObject.put("id", this.id);
     projectObject.put("name", this.name);
     projectObject.put("projectType",this.projectType);
-
     projectObject.put("incomingId",this.incomingId);
-
     projectObject.put("description", this.description);
     projectObject.put("createTimestamp", this.createTimestamp);
     projectObject.put("lastModifiedTimestamp", this.lastModifiedTimestamp);
@@ -394,7 +384,6 @@ public class Project {
     result = prime * result + ((this.name == null) ? 0 : this.name.hashCode());
     result = prime * result + ((this.projectType == null) ? 0 : this.projectType.hashCode());
     result = prime * result + ((this.incomingId == null) ? 0 : this.incomingId.hashCode());
-
     result = prime * result + ((this.source == null) ? 0 : this.source.hashCode());
     result = prime * result + this.version;
     return result;
@@ -432,7 +421,6 @@ public class Project {
       } else if (!this.projectType.equals(other.projectType)) {
           return false;
       }
-
       if (this.incomingId == null) {
           if (other.incomingId != null) {
               return false;
